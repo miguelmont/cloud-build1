@@ -10,9 +10,9 @@ steps:
   name: 'gcr.io/${_PROJECT_ID}/binauthz-attestation:latest'
   args:
     - '--artifact-url'
-    - 'gcr.io/${_PROJECT_ID}/helloworld:latest'
+    - 'gcr.io/${_PROJECT_ID}/runimage:latest'
     - '--attestor'
-    - 'projects/${_PROJECT_ID}/attestors/ATTESTOR_NAME'
+    - 'projects/${_PROJECT_ID}/attestors/demo-attestor'
     - '--keyversion'
     - 'projects/${_PROJECT_ID}/locations/global/keyRings/key-ring-1/cryptoKeys/key-1/cryptoKeyVersions/1'
 
