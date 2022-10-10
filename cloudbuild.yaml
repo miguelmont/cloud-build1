@@ -10,7 +10,7 @@ steps:
   name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
   - export
-  - 'DIGIST'
+  - DIGIST
   - '$(gcloud container images describe gcr.io/${_PROJECT_ID}/runimage:latest --format "value(image_summary.digest)")'
   - gcloud
   - beta
