@@ -5,10 +5,14 @@ steps:
   #Push the container image
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/${_PROJECT_ID}/runimage']
+  
 - id: 'attestion'
   name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-  entrypoint: 'gcloud'
   args:
+  - export
+  - IMG_DIGEST
+  - '$(gcloud container images describe gcr.io/${_PROJECT_ID}/runimage:latest --format "value(image_summary.digest))'
+  - gcloud
   - beta
   - container
   - binauthz
@@ -16,7 +20,6 @@ steps:
   - sign-and-create
   - --artifact-url
   - 'gcr.io/${_PROJECT_ID}/runimage:latest'
-  - --attestor
   - demo-attestor
   - --attestor-project
   - ${_PROJECT_ID}
@@ -32,6 +35,8 @@ steps:
   - '1'
 
   #Deploy container image to Cloud Run
+  waitFor:
+    - 'attestion'
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args: 
   - gcloud
