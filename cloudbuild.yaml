@@ -9,9 +9,6 @@ steps:
 - id: 'attestion'
   name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
-  - export
-  - IMG_DIGEST
-  - '$(gcloud container images describe gcr.io/${_PROJECT_ID}/runimage:latest --format "value(image_summary.digest))'
   - gcloud
   - beta
   - container
@@ -19,7 +16,7 @@ steps:
   - attestations
   - sign-and-create
   - --artifact-url
-  - 'gcr.io/${_PROJECT_ID}/runimage:latest'
+  - 'gcr.io/${_PROJECT_ID}/runimage@(gcloud container images describe gcr.io/${_PROJECT_ID}/runimage:latest --format "value(image_summary.digest)")'
   - demo-attestor
   - --attestor-project
   - ${_PROJECT_ID}
