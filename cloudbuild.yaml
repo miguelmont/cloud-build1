@@ -1,0 +1,23 @@
+steps:
+  #Build the container image
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/${_PROJECT_ID}/runimage', '.']
+  #Push the container image
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/${_PROJECT_ID}/runimage']
+  #Deploy container image to Cloud Run
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  args: 
+  - gcloud
+  - run
+  - deploy
+  - cloudrunv1
+  - --image
+  - gcr.io/${_PROJECT_ID}/runimage
+  - --region
+  - us-central1
+  - --allow-unauthenticated
+images:
+- gcr.io/${_PROJECT_ID}/runimage
+substitutions:
+  _PROJECT_ID: forward-emitter-352908
