@@ -16,7 +16,7 @@ steps:
   - attestations
   - sign-and-create
   - --artifact-url
-  - 'gcr.io/${_PROJECT_ID}/runimage@DIGEST'
+  - 'gcr.io/${_PROJECT_ID}/runimage@$DIGEST'
   - --attestor
   - 'demo-attestor'
   - --attestor-project
