@@ -17,6 +17,7 @@ steps:
   - sign-and-create
   - --artifact-url
   - 'gcr.io/${_PROJECT_ID}/runimage@(gcloud container images describe gcr.io/${_PROJECT_ID}/runimage:latest --format "value(image_summary.digest)")'
+  - --attestor
   - 'demo-attestor'
   - --attestor-project
   - '${_PROJECT_ID}'
