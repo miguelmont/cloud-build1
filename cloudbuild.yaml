@@ -5,7 +5,7 @@ steps:
   #Push the container image
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/${_PROJECT_ID}/runimage']
-  
+
 - id: 'attestion'
   name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
@@ -35,8 +35,6 @@ steps:
   - '1'
 
   #Deploy container image to Cloud Run
-  waitFor:
-    - 'attestion'
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args: 
   - gcloud
